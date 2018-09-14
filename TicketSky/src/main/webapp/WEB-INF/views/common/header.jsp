@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ 	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <c:set value="${pageContext.request.contextPath}" var="path"/>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,9 +22,9 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="${path }/resources/css/core-style.css"/>
-    <link rel="stylesheet" href="${path }/resources/style.css"/>
+    <%-- <link rel="stylesheet" href="${path }/resources/help/style.css"/> --%>
 	<link rel="stylesheet" href="${path }/resources/classy-nav.min.css"/>
-</head>
+ </head>
 
 <body>
     <!-- ##### Header Area Start ##### -->
@@ -115,7 +115,7 @@
                     <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 마이 페이지</a>
                 </div>
                 <div class="user-login-info">
-                    <a href="#"><!--<img src="img/core-img/user.svg" alt="">--> 고객 센터</a>
+                    <a href="${path}/help/helpHome.do"><!--<img src="img/core-img/user.svg" alt="">--> 고객 센터</a>
                 </div>
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="${path }/resources/img/core-img/heart.svg" alt=""> <span>3</span></a>
@@ -206,4 +206,3 @@
         </div>
     </div>
     <!-- ##### Right Side Cart End ##### -->
-    <section class="new_arrivals_area section-padding-80 clearfix">

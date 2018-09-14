@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="help">
+	<resultMap type="map" id="helpMap"></resultMap>
+	
+	<select id="selectConsultList" resultType="consult">
+		SELECT * FROM CONSULT
+	</select>
+	
+	<insert id="consultInsert" parameterType="consult">
+		insert into consult values(seq_consult_No.nextval,#{consult_No},#{cateNo},#{userId},#{title},#{content},#{cDate})
+	</insert>
+	
+	<insert id="noticeEnroll" parameterType="map">
+		insert into notice
+		values(notice_seq.nextval,#{cateNo},#{title},#{content},
+		<if test="opendate!=null and opendate!=''">
+			#{opendate}
+		</if>
+		<if test="opendate==null or opendate==''">
+			default
+		</if>
+		,default,default)
+	</insert>
+	<!-- noticeView 페이징처리,전체조회 -->
+	<!-- TO_CHAR(opendate, 'YYYY/MM/DD'),TO_CHAR(ndate, 'YYYY/MM/DD') -->
+	<select id="selectNoticeList" parameterType="map" resultMap="helpMap">
+		select noticeNo, c.cateNo, title, content, TO_CHAR(opendate, 'YYYY/MM/DD') opendate, TO_CHAR(ndate, 'YYYY/MM/DD') ndate, count, cateName 
+		from notice n join notice_category c on(n.cateNo=c.cateNo)
+		where 1=1
+		<if test="cno!=null and cno!=''">
+			and n.cateNo=#{cateNo}
+		</if>
+		order by ndate desc
+	</select>
+	<!-- notice 테이블 컬럼 개수 가져오기 -->
+	<select id="selectNoticeCount" resultType="_int">
+		select count(*) from notice
+	</select>
+	<!-- notice 목록 보기 -->
+	<select id="selectNoticeOne" resultMap="helpMap" parameterType="_int">
+		select * from notice join notice_category using(cateNo) 
+		where noticeNo=#{noticeNo} 
+	</select>
+	<!-- TO_CHAR(nDate) 추가함-->
+	<select id="selectNotice" parameterType="notice" resultType="notice">
+		select noticeNo, cateNo, title, content, TO_CHAR(openDate, 'YYYY-MM-DD') openDate, TO_CHAR(nDate,'YYYY-MM-DD') nDate, count
+		 from notice where noticeNo = #{noticeNo}
+	</select>
+	<update id="modifyEnd" parameterType="notice"><!-- noticeNo없었음 -->
+		update notice set cateNo=#{cateNo}, title=#{title},content=#{content},opendate=#{openDate} where noticeNo=#{noticeNo}
+	</update>
+	<delete id="noticeDelete" parameterType="_int">
+		delete from notice where noticeNo=#{no}
+	</delete>
+	<select id="faqSelectOne" parameterType="faq">
+		select * from faq
+	</select>
+</mapper>

@@ -26,11 +26,11 @@
 		</property>
 	</bean>
 	<!-- 2 mybatis SessionFactory 생성하기!! -->
-	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
 		<!--**은 mapper 하위 폴더를 의미한다.  -->
-		<!-- <property name="mapperLocations" value="classpath*:mapper/**/*.xml"></property>
-		<property name="configLocation" value="classpath:mybatis-config.xml"/> -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		 <property name="mapperLocations" value="classpath*:mapper/**/*.xml"/>
+		 <property name="configLocation" value="classpath:mybatis-config.xml"/>
 	</bean>
 	<!-- 3. mybatis session생성 -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">

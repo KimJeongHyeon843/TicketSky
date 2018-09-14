@@ -5,5 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 
 <c:set var="path" value="<%=request.getContextPath()%>"/>
-<jsp:include page = "/WEB-INF/views/common/header.jsp"/> 
-<jsp:include page = "/WEB-INF/views/common/footer.jsp"/>
+
+<script>
+	alert("${msg}");
+	location.href="${path}${loc}";
+	
+</script>
